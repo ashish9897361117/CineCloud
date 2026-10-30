@@ -7,6 +7,7 @@ from backend.handlers.auth_handlers import BaseHandler
 from backend.database import get_db, row_to_dict
 from backend.storage.local_storage import LocalStorage
 from backend.auth import extract_user_from_request
+from backend.config import MOVIES_DIR
 
 storage = LocalStorage()
 
@@ -44,9 +45,14 @@ class StreamHandler(BaseHandler):
         # Local file stream
         file_path = Path(video_path)
         if not file_path.is_file():
-            self.set_status(404)
-            self.write({"error": "Video file not found on disk"})
-            return
+            # Check relative to MOVIES_DIR or UPLOADS_DIR
+            alt_path = MOVIES_DIR / file_path.name
+            if alt_path.is_file():
+                file_path = alt_path
+            else:
+                self.set_status(404)
+                self.write({"error": "Video file not found on disk"})
+                return
 
         file_size = file_path.stat().st_size
         range_header = self.request.headers.get("Range")
@@ -69,13 +75,16 @@ class StreamHandler(BaseHandler):
         if not range_header:
             # Full file requested
             self.set_header("Content-Length", str(file_size))
-            with open(file_path, "rb") as f:
-                while True:
-                    chunk = f.read(256 * 1024)
-                    if not chunk:
-                        break
-                    self.write(chunk)
-                    yield self.flush()
+            try:
+                with open(file_path, "rb") as f:
+                    while True:
+                        chunk = f.read(256 * 1024)
+                        if not chunk:
+                            break
+                        self.write(chunk)
+                        yield self.flush()
+            except tornado.iostream.StreamClosedError:
+                pass
             return
 
         # Parse Byte Range: "bytes=start-end"
@@ -101,17 +110,20 @@ class StreamHandler(BaseHandler):
 
         # Stream chunk by chunk asynchronously
         chunk_size = 256 * 1024  # 256 KB chunks
-        with open(file_path, "rb") as f:
-            f.seek(start)
-            bytes_left = content_length
-            while bytes_left > 0:
-                read_amount = min(chunk_size, bytes_left)
-                data = f.read(read_amount)
-                if not data:
-                    break
-                self.write(data)
-                yield self.flush()
-                bytes_left -= len(data)
+        try:
+            with open(file_path, "rb") as f:
+                f.seek(start)
+                bytes_left = content_length
+                while bytes_left > 0:
+                    read_amount = min(chunk_size, bytes_left)
+                    data = f.read(read_amount)
+                    if not data:
+                        break
+                    self.write(data)
+                    yield self.flush()
+                    bytes_left -= len(data)
+        except tornado.iostream.StreamClosedError:
+            pass
 
 class SubtitleHandler(BaseHandler):
     """Delivers WebVTT subtitle files for movie playback"""

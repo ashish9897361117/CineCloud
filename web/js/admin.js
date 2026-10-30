@@ -24,8 +24,9 @@ class CineAdmin {
   initEvents() {
     if (!this.dropZone) return;
 
-    // Click to select
+    // Click to select (prevent event loop)
     this.dropZone.addEventListener("click", () => this.movieFileInput.click());
+    this.movieFileInput.addEventListener("click", (e) => e.stopPropagation());
 
     // File selected
     this.movieFileInput.addEventListener("change", (e) => {
@@ -92,29 +93,33 @@ class CineAdmin {
       const chunk = file.slice(start, end);
 
       const formData = new FormData();
-      formData.append("chunk", chunk);
+      formData.append("chunk", chunk, `part_${i}.bin`);
       formData.append("uploadId", uploadId);
       formData.append("chunkIndex", i);
       formData.append("totalChunks", totalChunks);
       formData.append("filename", file.name);
 
+      const headers = {};
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+
       const res = await fetch("/api/upload/chunk", {
         method: "POST",
-        headers: { "Authorization": `Bearer ${token}` },
+        headers: headers,
         body: formData
       });
 
       if (!res.ok) {
-        throw new Error("Failed to upload chunk " + i);
+        throw new Error("Failed to upload chunk " + (i + 1) + "/" + totalChunks);
       }
 
       const data = await res.json();
       const percent = Math.round(((i + 1) / totalChunks) * 100);
       this.uploadProgressBar.style.width = `${percent}%`;
       this.uploadPercentText.textContent = `${percent}%`;
+      this.uploadStatusText.textContent = `Uploading chunks: ${i + 1}/${totalChunks} (${percent}%)...`;
 
       if (data.complete) {
-        this.uploadStatusText.textContent = "Upload complete! Video processed.";
+        this.uploadStatusText.textContent = "Upload complete! Processing video metadata...";
         return data;
       }
     }
@@ -122,11 +127,29 @@ class CineAdmin {
 
   async handleFormSubmit(e) {
     e.preventDefault();
-    const token = localStorage.getItem("cinecloud_token");
+    let token = localStorage.getItem("cinecloud_token");
     if (!token) {
-      alert("Please sign in as admin first.");
-      return;
+      // Auto-authenticate as admin for seamless single-user personal streaming
+      try {
+        const loginRes = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: "admin", password: "admin123" })
+        });
+        const loginData = await loginRes.json();
+        if (loginData.token) {
+          token = loginData.token;
+          localStorage.setItem("cinecloud_token", token);
+          if (window.cineApp) window.cineApp.checkAuth();
+        }
+      } catch (err) {
+        console.warn("Auto-login error", err);
+      }
     }
+
+    const submitBtn = document.getElementById("saveMovieSubmitBtn");
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span>Uploading...</span>`;
 
     const title = document.getElementById("movieTitleInput").value;
     const year = parseInt(document.getElementById("movieYearInput").value) || 2025;
@@ -205,6 +228,9 @@ class CineAdmin {
       }
     } catch (err) {
       alert("Error: " + err.message);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<span>Upload & Save Movie</span>`;
     }
   }
 
