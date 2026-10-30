@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.db
+*.sqlite3
+
+# Uploads
+uploads/movies/*
+uploads/chunks/*
+!uploads/movies/.gitkeep
+!uploads/chunks/.gitkeep
+
+# Android
+.gradle/
+build/
+android-tv/app/build/
+android-tv/.gradle/
+*.apk
+*.aab
+local.properties
+
+# Environment
+.env
