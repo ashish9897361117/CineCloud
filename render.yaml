@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: cinecloud
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    region: oregon
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: STORAGE_DRIVER
+        value: local
+      - key: SECRET_KEY
+        generateValue: true
