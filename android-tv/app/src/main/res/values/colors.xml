@@ -1,0 +1,8 @@
+<resources>
+    <color name="brand_primary">#07090E</color>
+    <color name="brand_card">#0E121A</color>
+    <color name="accent_cyan">#06B6D4</color>
+    <color name="accent_purple">#8B5CF6</color>
+    <color name="text_main">#F8FAFC</color>
+    <color name="text_muted">#94A3B8</color>
+</resources>

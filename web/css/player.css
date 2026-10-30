@@ -1,0 +1,339 @@
+/* Custom Cinematic Video Player Styles */
+.player-container {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+.player-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Subtitles Styling via WebVTT ::cue */
+.player-video::cue {
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-family: var(--font-family);
+  font-size: 1.4rem;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.player-controls-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem 3.5rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, transparent 25%, transparent 70%, rgba(0, 0, 0, 0.95) 100%);
+  opacity: 1;
+  transition: opacity 0.35s ease;
+  pointer-events: auto;
+}
+
+.player-controls-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+  cursor: none;
+}
+
+/* Top Bar */
+.player-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.player-back-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.player-back-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.player-title-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+
+.player-meta-tags {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* Center Indicator */
+.center-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 80px;
+  height: 80px;
+  background: rgba(14, 18, 26, 0.8);
+  border: 2px solid var(--accent-cyan);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px var(--accent-glow);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.center-indicator.flash {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Timeline Scrubber */
+.timeline-wrap {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  position: relative;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+.timeline-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  position: relative;
+  transition: height 0.15s;
+}
+
+.timeline-wrap:hover .timeline-track {
+  height: 9px;
+}
+
+.timeline-buffered {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  width: 0%;
+}
+
+.timeline-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan), #38bdf8);
+  border-radius: 3px;
+  width: 0%;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.timeline-thumb {
+  position: absolute;
+  top: 50%;
+  right: -7px;
+  transform: translateY(-50%) scale(0);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s;
+}
+
+.timeline-wrap:hover .timeline-thumb {
+  transform: translateY(-50%) scale(1);
+}
+
+/* Bottom Controls */
+.player-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.controls-left, .controls-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.ctrl-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--accent-cyan);
+}
+
+.ctrl-btn.play-pause {
+  background: rgba(6, 182, 212, 0.2);
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  color: var(--accent-cyan);
+}
+
+.ctrl-btn.play-pause:hover {
+  background: var(--accent-cyan);
+  color: #000;
+}
+
+.time-display {
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+.time-sep {
+  margin: 0 0.35rem;
+  color: #64748b;
+}
+
+/* Volume Slider */
+.volume-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.volume-slider {
+  width: 80px;
+  height: 5px;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* Dropdown Menu Popups */
+.menu-popup-container {
+  position: relative;
+}
+
+.menu-popup {
+  position: absolute;
+  bottom: 50px;
+  right: 0;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0;
+  min-width: 180px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  display: none;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.menu-popup.open {
+  display: flex;
+}
+
+.menu-item {
+  padding: 0.6rem 1.25rem;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.menu-item.active {
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+/* Resume Watching Toast Prompt */
+.resume-prompt-card {
+  position: absolute;
+  bottom: 120px;
+  left: 3.5rem;
+  background: rgba(14, 18, 26, 0.92);
+  border: 1px solid var(--accent-cyan);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow);
+  backdrop-filter: blur(16px);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 50;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.resume-prompt-text {
+  font-size: 0.95rem;
+  color: #f1f5f9;
+}
+
+.resume-actions {
+  display: flex;
+  gap: 0.75rem;
+}

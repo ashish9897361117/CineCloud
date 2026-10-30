@@ -1,0 +1,15 @@
+<resources>
+    <style name="Theme.CineCloudTV" parent="Theme.Leanback">
+        <item name="android:windowBackground">@color/brand_primary</item>
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorAccent">@color/accent_cyan</item>
+        <item name="defaultBrandColor">@color/brand_primary</item>
+        <item name="defaultSearchColor">@color/accent_cyan</item>
+    </style>
+
+    <style name="Theme.CineCloudTV.Player" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">#000000</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:keepScreenOn">true</item>
+    </style>
+</resources>

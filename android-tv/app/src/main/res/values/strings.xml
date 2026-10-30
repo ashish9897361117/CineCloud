@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CineCloud TV</string>
+    <string name="search_hint">Connect Server / Search Movies</string>
+</resources>

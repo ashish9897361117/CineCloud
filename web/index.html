@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CineCloud - Personal Movie Streaming Platform</title>
+  <meta name="description" content="Personal movie streaming platform with Android TV remote support, cloud storage, and adaptive streaming.">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/player.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="cine-header" id="mainHeader">
+    <div style="display: flex; align-items: center; gap: 2.5rem;">
+      <a href="#home" class="brand-logo tv-nav-item" tabindex="0">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 6.47L5.76 10H20v8H4V6.47M22 4h-4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4z"/></svg>
+        </div>
+        <div class="brand-text">Cine<span>Cloud</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link active tv-nav-item" tabindex="0">Home</a></li>
+          <li><a href="#continue-watching" class="nav-link tv-nav-item" tabindex="0">Continue Watching</a></li>
+          <li><a href="#library" class="nav-link tv-nav-item" tabindex="0">Library</a></li>
+          <li><a href="#admin" class="nav-link tv-nav-item" id="adminNavLink" tabindex="0">Upload Studio</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="header-actions">
+      <!-- Search -->
+      <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" id="searchInput" class="search-input tv-nav-item" placeholder="Search movies, genre..." tabindex="0">
+      </div>
+
+      <!-- TV 10-Foot Mode Switch -->
+      <button id="tvModeBtn" class="btn btn-tv-mode tv-nav-item" title="Switch to TV 10-Foot Remote UI" tabindex="0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
+        <span>TV Mode</span>
+      </button>
+
+      <!-- User Auth Profile -->
+      <div id="authActions">
+        <button id="loginBtn" class="btn btn-primary tv-nav-item" tabindex="0">Sign In</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main View Container -->
+  <main id="appContainer">
+
+    <!-- HOME VIEW -->
+    <section id="homeView">
+      <!-- Hero Spotlight Banner -->
+      <section class="hero-spotlight" id="heroSpotlight">
+        <div class="hero-content">
+          <div class="hero-badge">Featured Premiere</div>
+          <h1 class="hero-title" id="heroTitle">Cosmic Odyssey: Beyond Horizons</h1>
+          <div class="hero-meta">
+            <div class="hero-rating">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span id="heroRating">9.2</span>
+            </div>
+            <span class="pill-badge quality" id="heroQuality">4K Ultra HD</span>
+            <span class="pill-badge" id="heroYear">2025</span>
+            <span class="pill-badge" id="heroDuration">2h 4m</span>
+            <span id="heroGenre" style="color: #94a3b8; font-size: 0.85rem;">Sci-Fi, Adventure</span>
+          </div>
+          <p class="hero-synopsis" id="heroSynopsis">
+            When an interstellar anomaly appears near Saturn, an elite expedition voyages into uncharted celestial frontiers, confronting time dilation, rogue exoplanets, and the ultimate origins of cosmic intelligence.
+          </p>
+          <div class="hero-buttons">
+            <button id="heroPlayBtn" class="btn btn-primary tv-nav-item" tabindex="0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <span>Watch Now</span>
+            </button>
+            <button id="heroDetailsBtn" class="btn btn-secondary tv-nav-item" tabindex="0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+              <span>More Info</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Category Rails Container -->
+      <div class="rails-container" id="railsContainer">
+        <!-- Injected via JavaScript (Continue Watching, Recently Added, etc.) -->
+      </div>
+    </section>
+
+    <!-- LIBRARY & SEARCH VIEW -->
+    <section id="libraryView" style="display: none; padding: 6rem 4rem 4rem 4rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <h2 style="font-size: 2rem; font-weight: 800;">Movie Library</h2>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <select id="genreFilter" class="btn btn-secondary tv-nav-item" tabindex="0" style="padding: 0.6rem 1rem;">
+            <option value="">All Genres</option>
+          </select>
+          <select id="sortFilter" class="btn btn-secondary tv-nav-item" tabindex="0" style="padding: 0.6rem 1rem;">
+            <option value="recent">Recently Added</option>
+            <option value="rating">Top Rated</option>
+            <option value="title">Alphabetical</option>
+          </select>
+        </div>
+      </div>
+      <div id="libraryGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1.5rem;">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- ADMIN STUDIO & UPLOAD VIEW -->
+    <section id="adminView" style="display: none; padding: 6rem 4rem 4rem 4rem;">
+      <div style="max-width: 1000px; margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+          <div>
+            <h1 style="font-size: 2.2rem; font-weight: 800;">Upload & Studio Manager</h1>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Upload movies directly from your phone or laptop to cloud storage.</p>
+          </div>
+          <button id="refreshAdminBtn" class="btn btn-secondary">Refresh</button>
+        </div>
+
+        <!-- Uploader Card -->
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 3rem;">
+          <h2 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--accent-cyan)"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+            Add New Movie
+          </h2>
+
+          <form id="uploadMovieForm">
+            <!-- Drag & Drop Zone -->
+            <div id="dropZone" style="border: 2px dashed rgba(6, 182, 212, 0.4); background: rgba(6, 182, 212, 0.03); border-radius: var(--radius-md); padding: 3rem 2rem; text-align: center; cursor: pointer; transition: all 0.2s; margin-bottom: 2rem;">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="var(--accent-cyan)" style="margin-bottom: 1rem;"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+              <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Drag & drop movie file here or click to browse</h3>
+              <p style="color: var(--text-dim); font-size: 0.85rem;">Supports MP4, MKV, WebM (up to 4K Ultra HD). Files are chunked for reliable upload.</p>
+              <input type="file" id="movieFileInput" accept="video/mp4,video/mkv,video/webm" style="display: none;">
+              <div id="selectedFileInfo" style="margin-top: 1rem; color: var(--accent-cyan); font-weight: 600; display: none;"></div>
+            </div>
+
+            <!-- Upload Progress Bar -->
+            <div id="uploadProgressWrap" style="display: none; margin-bottom: 2rem;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                <span id="uploadStatusText">Uploading to CineCloud...</span>
+                <span id="uploadPercentText">0%</span>
+              </div>
+              <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                <div id="uploadProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); transition: width 0.2s;"></div>
+              </div>
+            </div>
+
+            <!-- Metadata Form Fields -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div>
+                <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Movie Title *</label>
+                <input type="text" id="movieTitleInput" class="search-input" style="width: 100%; border-radius: 8px;" placeholder="e.g. Interstellar 2026" required>
+              </div>
+              <div>
+                <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Release Year</label>
+                <input type="number" id="movieYearInput" class="search-input" style="width: 100%; border-radius: 8px;" placeholder="2025" value="2025">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div>
+                <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Genres (comma-separated)</label>
+                <input type="text" id="movieGenreInput" class="search-input" style="width: 100%; border-radius: 8px;" placeholder="Sci-Fi, Adventure, Action" value="Sci-Fi, Adventure">
+              </div>
+              <div>
+                <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Rating (0 - 10)</label>
+                <input type="number" step="0.1" id="movieRatingInput" class="search-input" style="width: 100%; border-radius: 8px;" placeholder="8.5" value="8.5">
+              </div>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Synopsis / Description</label>
+              <textarea id="movieDescInput" class="search-input" style="width: 100%; border-radius: 8px; height: 90px; resize: vertical;" placeholder="Overview of the movie..."></textarea>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div>
+                <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Poster Image (URL or browse)</label>
+                <input type="text" id="moviePosterInput" class="search-input" style="width: 100%; border-radius: 8px;" placeholder="https://... or uploaded image">
+              </div>
+              <div>
+                <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Backdrop Wallpaper (URL)</label>
+                <input type="text" id="movieBackdropInput" class="search-input" style="width: 100%; border-radius: 8px;" placeholder="https://... or auto-extracted">
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+              <input type="checkbox" id="movieFeaturedInput" style="width: 18px; height: 18px; accent-color: var(--accent-cyan);">
+              <label for="movieFeaturedInput" style="font-size: 0.95rem; cursor: pointer;">Feature this movie in the main spotlight banner</label>
+            </div>
+
+            <button type="submit" id="saveMovieSubmitBtn" class="btn btn-primary" style="padding: 0.8rem 2rem;">
+              <span>Upload & Save Movie</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Movie Management Table -->
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem;">
+          <h2 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem;">Manage Existing Movies</h2>
+          <div id="adminMovieList" style="display: flex; flex-direction: column; gap: 1rem;">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MOVIE DETAIL MODAL -->
+  <div class="modal-backdrop" id="movieModal">
+    <div class="modal-content">
+      <button class="modal-close-btn tv-nav-item" id="closeModalBtn" tabindex="0">✕</button>
+      <div class="detail-hero" id="modalHero">
+        <div class="detail-hero-gradient"></div>
+      </div>
+      <div class="detail-body">
+        <div class="detail-poster-wrap">
+          <img id="modalPoster" class="detail-poster" src="" alt="Movie Poster">
+        </div>
+        <div class="detail-info">
+          <h2 class="detail-title" id="modalTitle">Movie Title</h2>
+          <div class="detail-meta-row">
+            <div class="card-rating">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span id="modalRating">8.5</span>
+            </div>
+            <span class="pill-badge quality" id="modalResolution">4K Ultra HD</span>
+            <span class="pill-badge" id="modalYear">2025</span>
+            <span class="pill-badge" id="modalDuration">2h 10m</span>
+            <span id="modalGenre" style="color: var(--text-muted); font-size: 0.9rem;">Action, Sci-Fi</span>
+          </div>
+          <p class="detail-desc" id="modalDesc">Description text here.</p>
+
+          <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
+            <button id="modalPlayBtn" class="btn btn-primary tv-nav-item" tabindex="0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <span id="modalPlayBtnText">Play Movie</span>
+            </button>
+            <div id="modalResumeBadge" style="display: none; font-size: 0.85rem; color: var(--accent-cyan);"></div>
+          </div>
+
+          <div style="border-top: 1px solid var(--border-color); padding-top: 1rem;">
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.3rem;">AVAILABLE SUBTITLES & AUDIO:</div>
+            <div class="track-chips" id="modalTracks"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO PLAYER CONTAINER (CUSTOM FULLSCREEN) -->
+  <div class="player-container" id="playerContainer" style="display: none;">
+    <video id="cineVideo" class="player-video" playsinline></video>
+
+    <!-- Center Ripple Indicator for Play / Pause / Seek -->
+    <div class="center-indicator" id="centerIndicator">
+      <svg id="centerIndicatorIcon" width="40" height="40" viewBox="0 0 24 24" fill="var(--accent-cyan)"><path d="M8 5v14l11-7z"/></svg>
+    </div>
+
+    <!-- Resume Prompt Toast Overlay -->
+    <div class="resume-prompt-card" id="playerResumePrompt" style="display: none;">
+      <div>
+        <div style="font-weight: 700; color: #fff; margin-bottom: 0.2rem;">Resume Playback?</div>
+        <div class="resume-prompt-text" id="resumePromptText">You were watching at 00:42:15</div>
+      </div>
+      <div class="resume-actions">
+        <button id="resumeYesBtn" class="btn btn-primary tv-nav-item" style="padding: 0.4rem 1rem; font-size: 0.85rem;" tabindex="0">Resume</button>
+        <button id="resumeNoBtn" class="btn btn-secondary tv-nav-item" style="padding: 0.4rem 1rem; font-size: 0.85rem;" tabindex="0">Start Over</button>
+      </div>
+    </div>
+
+    <!-- Controls Overlay -->
+    <div class="player-controls-overlay" id="playerControls">
+      <!-- Top Bar -->
+      <div class="player-top-bar">
+        <button class="player-back-btn tv-nav-item" id="playerExitBtn" tabindex="0">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        </button>
+        <div class="player-title-info">
+          <div class="player-title" id="playerMovieTitle">Movie Title</div>
+          <div class="player-meta-tags">
+            <span id="playerMovieRes">4K Ultra HD</span>
+            <span>•</span>
+            <span id="playerMovieAudio">Dolby 5.1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div>
+        <!-- Scrubber Timeline -->
+        <div class="timeline-wrap" id="timelineWrap">
+          <div class="timeline-track">
+            <div class="timeline-buffered" id="timelineBuffered"></div>
+            <div class="timeline-progress" id="timelineProgress">
+              <div class="timeline-thumb"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="player-bottom-bar">
+          <div class="controls-left">
+            <!-- Play/Pause -->
+            <button class="ctrl-btn play-pause tv-nav-item" id="playPauseBtn" tabindex="0">
+              <svg id="playIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <svg id="pauseIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+
+            <!-- -10s -->
+            <button class="ctrl-btn tv-nav-item" id="rewindBtn" title="Rewind 10s" tabindex="0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg>
+            </button>
+
+            <!-- +10s -->
+            <button class="ctrl-btn tv-nav-item" id="forwardBtn" title="Forward 10s" tabindex="0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/></svg>
+            </button>
+
+            <!-- Volume -->
+            <div class="volume-group">
+              <button class="ctrl-btn tv-nav-item" id="volumeBtn" tabindex="0">
+                <svg id="volumeIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+              </button>
+              <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="1">
+            </div>
+
+            <!-- Time -->
+            <div class="time-display">
+              <span id="currentTimeDisplay">00:00:00</span>
+              <span class="time-sep">/</span>
+              <span id="durationTimeDisplay">00:00:00</span>
+            </div>
+          </div>
+
+          <div class="controls-right">
+            <!-- Subtitles Menu -->
+            <div class="menu-popup-container">
+              <button class="ctrl-btn tv-nav-item" id="subtitleBtn" title="Subtitles" tabindex="0">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 7H9.5v-.5h-2v3h2V13H11v1c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1zm7 0h-1.5v-.5h-2v3h2V13H18v1c0 .55-.45 1-1 1h-3c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1z"/></svg>
+              </button>
+              <div class="menu-popup" id="subtitleMenu">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Audio Track Menu -->
+            <div class="menu-popup-container">
+              <button class="ctrl-btn tv-nav-item" id="audioBtn" title="Audio Tracks" tabindex="0">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/></svg>
+              </button>
+              <div class="menu-popup" id="audioMenu">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Playback Speed -->
+            <div class="menu-popup-container">
+              <button class="ctrl-btn tv-nav-item" id="speedBtn" title="Speed" tabindex="0" style="font-size: 0.85rem; font-weight: 700;">
+                1x
+              </button>
+              <div class="menu-popup" id="speedMenu">
+                <div class="menu-item" data-speed="0.75">0.75x</div>
+                <div class="menu-item active" data-speed="1.0">Normal (1x)</div>
+                <div class="menu-item" data-speed="1.25">1.25x</div>
+                <div class="menu-item" data-speed="1.5">1.5x</div>
+                <div class="menu-item" data-speed="2.0">2.0x</div>
+              </div>
+            </div>
+
+            <!-- Fullscreen -->
+            <button class="ctrl-btn tv-nav-item" id="fullscreenBtn" title="Toggle Fullscreen" tabindex="0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL -->
+  <div class="modal-backdrop" id="authModal">
+    <div class="modal-content" style="max-width: 440px; padding: 2.5rem;">
+      <button class="modal-close-btn tv-nav-item" id="closeAuthModalBtn" tabindex="0">✕</button>
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div class="brand-icon" style="margin: 0 auto 1rem auto; width: 44px; height: 44px;">
+          <svg viewBox="0 0 24 24"><path d="M4 6.47L5.76 10H20v8H4V6.47M22 4h-4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4z"/></svg>
+        </div>
+        <h2 id="authTitle" style="font-size: 1.6rem; font-weight: 800;">Sign in to CineCloud</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.3rem;">Private movie streaming library</p>
+      </div>
+
+      <form id="authForm">
+        <div style="margin-bottom: 1.25rem;">
+          <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem;">Username or Email</label>
+          <input type="text" id="authUsernameInput" class="search-input" style="width: 100%; border-radius: 8px;" placeholder="admin or viewer" required>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem;">Password</label>
+          <input type="password" id="authPasswordInput" class="search-input" style="width: 100%; border-radius: 8px;" placeholder="••••••••" required>
+        </div>
+        <div id="authErrorMsg" style="color: #ef4444; font-size: 0.85rem; margin-bottom: 1rem; display: none;"></div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 0.75rem;">
+          <span id="authSubmitText">Sign In</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TV PAIRING MODAL / SCREEN (FOR REMOTE ANDROID TV ACTIVATION) -->
+  <div class="modal-backdrop" id="tvPairModal">
+    <div class="modal-content" style="max-width: 500px; padding: 3rem 2rem; text-align: center;">
+      <button class="modal-close-btn tv-nav-item" id="closeTvPairBtn" tabindex="0">✕</button>
+      <div style="font-size: 3rem; margin-bottom: 1rem;">📺</div>
+      <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem;">Pair with Android TV</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">
+        On your mobile phone or laptop, visit your CineCloud server and enter this pairing code:
+      </p>
+      <div id="tvPairCodeDisplay" style="font-size: 3.2rem; font-weight: 900; letter-spacing: 8px; color: var(--accent-cyan); background: rgba(6, 182, 212, 0.1); border: 2px dashed var(--accent-cyan); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.5rem; font-family: monospace;">
+        ------
+      </div>
+      <div id="tvPairStatus" style="color: var(--text-muted); font-size: 0.9rem;">
+        Waiting for authorization from mobile device...
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notice" id="toastNotice">
+    <span id="toastMessage">Notification message</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/tv-nav.js"></script>
+  <script src="/js/player.js"></script>
+  <script src="/js/admin.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

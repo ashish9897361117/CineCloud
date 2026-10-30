@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  cinecloud:
+    build: .
+    container_name: cinecloud_server
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - HOST=0.0.0.0
+      - SECRET_KEY=cinecloud-production-secret-key-change-me
+      - STORAGE_DRIVER=local # Change to 's3' if using AWS S3 / Cloudflare R2
+      # S3 / Cloudflare R2 / MinIO credentials (optional)
+      # - S3_BUCKET_NAME=my-cinecloud-bucket
+      # - S3_ENDPOINT_URL=https://<account_id>.r2.cloudflarestorage.com
+      # - S3_ACCESS_KEY=your_access_key
+      # - S3_SECRET_KEY=your_secret_key
+      # - S3_REGION=auto
+    volumes:
+      - ./data:/app/data
+      - ./uploads:/app/uploads
