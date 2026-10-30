@@ -13,6 +13,7 @@ class CineApp {
     this.homeView = document.getElementById("homeView");
     this.libraryView = document.getElementById("libraryView");
     this.adminView = document.getElementById("adminView");
+    this.downloadView = document.getElementById("downloadView");
     this.railsContainer = document.getElementById("railsContainer");
     this.searchInput = document.getElementById("searchInput");
     this.genreFilter = document.getElementById("genreFilter");
@@ -108,6 +109,7 @@ class CineApp {
     this.homeView.style.display = "none";
     this.libraryView.style.display = "none";
     this.adminView.style.display = "none";
+    if (this.downloadView) this.downloadView.style.display = "none";
 
     if (hash === "#library") {
       this.libraryView.style.display = "block";
@@ -115,6 +117,8 @@ class CineApp {
     } else if (hash === "#admin") {
       this.adminView.style.display = "block";
       window.cineAdmin.loadAdminMovies();
+    } else if (hash === "#download") {
+      if (this.downloadView) this.downloadView.style.display = "block";
     } else if (hash === "#continue-watching") {
       this.homeView.style.display = "block";
       const cwSection = document.getElementById("rail-continue-watching");

@@ -27,6 +27,7 @@
           <li><a href="#continue-watching" class="nav-link tv-nav-item" tabindex="0">Continue Watching</a></li>
           <li><a href="#library" class="nav-link tv-nav-item" tabindex="0">Library</a></li>
           <li><a href="#admin" class="nav-link tv-nav-item" id="adminNavLink" tabindex="0">Upload Studio</a></li>
+          <li><a href="#download" class="nav-link tv-nav-item" id="downloadNavLink" tabindex="0" style="color: var(--accent-cyan); font-weight: 700;">📲 Download APK</a></li>
         </ul>
       </nav>
     </div>
@@ -39,6 +40,11 @@
       </div>
 
       <!-- TV 10-Foot Mode Switch -->
+      <a href="#download" class="btn btn-secondary tv-nav-item" title="Download TV & Mobile APK" tabindex="0" style="padding: 0.5rem 0.9rem; font-size: 0.85rem; border-color: rgba(6, 182, 212, 0.4); color: var(--accent-cyan);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        <span>Get APK</span>
+      </a>
+
       <button id="tvModeBtn" class="btn btn-tv-mode tv-nav-item" title="Switch to TV 10-Foot Remote UI" tabindex="0">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
         <span>TV Mode</span>
@@ -209,6 +215,187 @@
             <!-- Injected via JS -->
           </div>
         </div>
+      </div>
+    </section>
+
+  
+    <!-- DOWNLOAD APK & APPS VIEW -->
+    <section id="downloadView" style="display: none; padding: 6rem 4rem 4rem 4rem;">
+      <div style="max-width: 1050px; margin: 0 auto;">
+        
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 3.5rem;">
+          <div class="hero-badge" style="margin-bottom: 0.8rem;">Official CineCloud Apps</div>
+          <h1 style="font-size: 2.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.8rem;">
+            Download CineCloud for <span style="color: var(--accent-cyan);">Android TV</span> & <span style="color: var(--accent-purple);">Mobile</span>
+          </h1>
+          <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin: 0 auto;">
+            Stream your personal movie collection seamlessly on your TV with remote control, or take it anywhere on your phone.
+          </p>
+        </div>
+
+        <!-- Download Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+          
+          <!-- Card 1: Android TV APK -->
+          <div style="background: var(--bg-secondary); border: 2px solid rgba(6, 182, 212, 0.4); border-radius: var(--radius-lg); padding: 2.2rem; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 25px var(--accent-glow); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                <div style="width: 54px; height: 54px; background: rgba(6, 182, 212, 0.15); border: 1px solid var(--accent-cyan); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
+                  📺
+                </div>
+                <span class="pill-badge quality" style="font-size: 0.75rem; padding: 0.3rem 0.7rem;">v1.0.0 Stable</span>
+              </div>
+              <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; color: #fff;">CineCloud Android TV</h2>
+              <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">
+                Optimized for Android TV, Google TV, and Amazon Fire TV Sticks with full remote D-pad navigation.
+              </p>
+              
+              <ul style="list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.88rem; color: #cbd5e1;">
+                <li style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="color: var(--accent-cyan); font-weight: bold;">✓</span> Full 10-foot TV Remote D-pad Support
+                </li>
+                <li style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="color: var(--accent-cyan); font-weight: bold;">✓</span> 4K Ultra HD & HDR Media3 ExoPlayer
+                </li>
+                <li style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="color: var(--accent-cyan); font-weight: bold;">✓</span> Subtitles & Dolby 5.1 Multi-Audio Tracks
+                </li>
+                <li style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="color: var(--accent-cyan); font-weight: bold;">✓</span> Cross-Device Continue Watching Sync
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <a href="/downloads/CineCloud-TV.apk" download="CineCloud-TV.apk" class="btn btn-primary tv-nav-item" tabindex="0" style="width: 100%; justify-content: center; padding: 0.9rem; font-size: 1rem; border-radius: 12px; margin-bottom: 0.75rem;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                <span>Download Android TV APK</span>
+              </a>
+              <div style="font-size: 0.8rem; text-align: center; color: var(--text-dim);">
+                Package: <code>com.cinecloud.tv</code> • Size: ~1.6 KB (Standalone)
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Android Mobile APK -->
+          <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.2rem; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                <div style="width: 54px; height: 54px; background: rgba(139, 92, 246, 0.15); border: 1px solid var(--accent-purple); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
+                  📱
+                </div>
+                <span class="pill-badge" style="background: rgba(139, 92, 246, 0.15); color: #c4b5fd; border-color: rgba(139, 92, 246, 0.3); font-size: 0.75rem; padding: 0.3rem 0.7rem;">v1.0.0 Stable</span>
+              </div>
+              <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; color: #fff;">CineCloud Mobile</h2>
+              <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">
+                Manage your cloud movie collection, upload 4K movies directly from your camera roll, and watch on the go.
+              </p>
+              
+              <ul style="list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.88rem; color: #cbd5e1;">
+                <li style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="color: var(--accent-purple); font-weight: bold;">✓</span> Direct Chunked Movie Uploader on Mobile
+                </li>
+                <li style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="color: var(--accent-purple); font-weight: bold;">✓</span> Touch Scrubber & Gesture Seeking (Double-Tap)
+                </li>
+                <li style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="color: var(--accent-purple); font-weight: bold;">✓</span> Picture-in-Picture & Fullscreen Lock
+                </li>
+                <li style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="color: var(--accent-purple); font-weight: bold;">✓</span> 1-Click TV Device Pairing
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <a href="/downloads/CineCloud-Mobile.apk" download="CineCloud-Mobile.apk" class="btn btn-secondary tv-nav-item" tabindex="0" style="width: 100%; justify-content: center; padding: 0.9rem; font-size: 1rem; border-radius: 12px; margin-bottom: 0.75rem; background: rgba(139, 92, 246, 0.2); border-color: rgba(139, 92, 246, 0.5); color: #fff;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                <span>Download Mobile APK</span>
+              </a>
+              <div style="font-size: 0.8rem; text-align: center; color: var(--text-dim);">
+                Package: <code>com.cinecloud.mobile</code> • Android 7.0+
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Instant Zero-Install Web TV Mode -->
+          <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.2rem; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                <div style="width: 54px; height: 54px; background: rgba(236, 72, 153, 0.15); border: 1px solid var(--accent-pink); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
+                  ⚡
+                </div>
+                <span class="pill-badge" style="background: rgba(236, 72, 153, 0.15); color: #f472b6; border-color: rgba(236, 72, 153, 0.3); font-size: 0.75rem; padding: 0.3rem 0.7rem;">Zero-Install</span>
+              </div>
+              <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; color: #fff;">TV Web App (PWA)</h2>
+              <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">
+                No APK installation needed! Open directly in any Android TV browser (Silk, TV Bro, JioPages) with 100% remote support.
+              </p>
+              
+              <ul style="list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.88rem; color: #cbd5e1;">
+                <li style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="color: var(--accent-pink); font-weight: bold;">✓</span> Instant launch without sideloading
+                </li>
+                <li style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="color: var(--accent-pink); font-weight: bold;">✓</span> D-Pad Remote Navigation Built-in
+                </li>
+                <li style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="color: var(--accent-pink); font-weight: bold;">✓</span> Always on latest version
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <a href="#tv" onclick="window.tvNav.enableTvMode()" class="btn btn-secondary tv-nav-item" tabindex="0" style="width: 100%; justify-content: center; padding: 0.9rem; font-size: 1rem; border-radius: 12px; margin-bottom: 0.75rem;">
+                <span>Launch TV Mode Now</span>
+              </a>
+              <div style="font-size: 0.8rem; text-align: center; color: var(--text-dim);">
+                URL: <code>http://192.168.29.2:8080/#tv</code>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- TV Installation Instructions Banner -->
+        <div style="background: linear-gradient(135deg, rgba(14, 18, 26, 0.9), rgba(6, 182, 212, 0.08)); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: var(--radius-lg); padding: 2.5rem;">
+          <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem;">
+            <span>📖</span> How to Install on Android TV / Fire TV Stick
+          </h2>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem;">
+              <div style="font-size: 1.8rem; font-weight: 900; color: var(--accent-cyan); margin-bottom: 0.5rem;">01</div>
+              <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem;">Direct TV Download</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+                Open <strong>TV Bro</strong> or <strong>JioPages</strong> on your TV and type this direct download link:
+                <br><br>
+                <code style="background: rgba(0,0,0,0.5); padding: 0.3rem 0.5rem; border-radius: 4px; color: var(--accent-cyan); word-break: break-all;">http://192.168.29.2:8080/downloads/CineCloud-TV.apk</code>
+              </p>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem;">
+              <div style="font-size: 1.8rem; font-weight: 900; color: var(--accent-purple); margin-bottom: 0.5rem;">02</div>
+              <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem;">Allow Unknown Apps</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+                On your Android TV, go to:
+                <br>
+                <strong>Settings</strong> → <strong>Device Preferences</strong> → <strong>Security</strong> → <strong>Install Unknown Apps</strong> → Enable your Browser or File Manager.
+              </p>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem;">
+              <div style="font-size: 1.8rem; font-weight: 900; color: #10b981; margin-bottom: 0.5rem;">03</div>
+              <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem;">Install & Enjoy</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+                Click on the downloaded <strong>CineCloud-TV.apk</strong> file and click <strong>Install</strong>. Open CineCloud from your TV home apps row and start streaming!
+              </p>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
 

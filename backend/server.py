@@ -25,6 +25,26 @@ from backend.handlers.upload_handlers import (
 
 WEB_DIR = BASE_DIR / "web"
 
+class DownloadApkHandler(tornado.web.RequestHandler):
+    def get(self, filename: str):
+        downloads_dir = WEB_DIR / "downloads"
+        file_path = downloads_dir / Path(filename).name
+        if not file_path.exists() or not file_path.is_file():
+            self.set_status(404)
+            self.write("File not found")
+            return
+
+        self.set_header("Content-Type", "application/vnd.android.package-archive")
+        self.set_header("Content-Disposition", f'attachment; filename="{file_path.name}"')
+        self.set_header("Content-Length", str(file_path.stat().st_size))
+
+        with open(file_path, "rb") as f:
+            while True:
+                chunk = f.read(64 * 1024)
+                if not chunk:
+                    break
+                self.write(chunk)
+
 def make_app():
     handlers = [
         # Authentication & TV Pairing
@@ -51,6 +71,9 @@ def make_app():
         (r"/api/upload/chunk", ChunkUploadHandler),
         (r"/api/upload/poster", ImageUploadHandler),
         (r"/api/upload/subtitle", SubtitleUploadHandler),
+
+        # Direct APK Downloads
+        (r"/downloads/(.+)", DownloadApkHandler),
 
         # Uploaded Assets static route
         (r"/uploads/(.*)", tornado.web.StaticFileHandler, {"path": str(UPLOADS_DIR)}),
