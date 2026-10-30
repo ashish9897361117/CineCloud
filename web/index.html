@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>CineCloud - Personal Movie Streaming Platform</title>
   <meta name="description" content="Personal movie streaming platform with Android TV remote support, cloud storage, and adaptive streaming.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%2306b6d4'/><path d='M8 5v14l11-7z' fill='white'/></svg>">
   <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="stylesheet" href="/css/player.css">
@@ -351,7 +352,7 @@
                 <span>Launch TV Mode Now</span>
               </a>
               <div style="font-size: 0.8rem; text-align: center; color: var(--text-dim);">
-                URL: <code>http://192.168.29.2:8080/#tv</code>
+                URL: <code id="tvUrlText">https://cinecloud-8jao.onrender.com/#tv</code>
               </div>
             </div>
           </div>
@@ -371,7 +372,7 @@
               <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
                 Open <strong>TV Bro</strong> or <strong>JioPages</strong> on your TV and type this direct download link:
                 <br><br>
-                <code style="background: rgba(0,0,0,0.5); padding: 0.3rem 0.5rem; border-radius: 4px; color: var(--accent-cyan); word-break: break-all;">http://192.168.29.2:8080/downloads/CineCloud-TV.apk</code>
+                <code style="background: rgba(0,0,0,0.5); padding: 0.3rem 0.5rem; border-radius: 4px; color: var(--accent-cyan); word-break: break-all;"><span id="tvApkUrlText">https://cinecloud-8jao.onrender.com/downloads/CineCloud-TV.apk</span></code>
               </p>
             </div>
 
